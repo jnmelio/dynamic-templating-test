@@ -25,7 +25,15 @@ app.get('/results', (req,res) => {
   let filteredPassed = students.filter((passStudent) => {
     return passStudent.hasPassed == true
   })
-  res.render('results.hbs', {students: filteredPassed})
+  let filteredSorting = filteredPassed.sort((a, b) => {
+    return b.score - a.score
+    // if (a>b) {
+    //   return -1
+    // } else if (a<b) {
+    //   return 1
+    // }
+  })
+  res.render('results.hbs', {students: filteredSorting})
 })
 
 app.listen(process.env.PORT, () =>
